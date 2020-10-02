@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View btn;
     private View btn2;
+    private View btn3;
     private final String GREETER = "Hello from the other side!";
 
     @Override
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btnVocabulary);
         btn2 = (Button) findViewById(R.id.btnExamples);
+        btn2 = (Button) findViewById(R.id.btnEvaluation);
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -35,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Acceder al Segundo Activity
                 Intent intent = new Intent(MainActivity.this, ExamplesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // Acceder al Segundo Activity
+                Intent intent = new Intent(MainActivity.this, EvaluationActivity.class);
                 startActivity(intent);
             }
         });

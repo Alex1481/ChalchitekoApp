@@ -43,6 +43,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnExamples"/>
 
     <Button
+        android:id="@+id/btnEvaluation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Evaluaciones"
