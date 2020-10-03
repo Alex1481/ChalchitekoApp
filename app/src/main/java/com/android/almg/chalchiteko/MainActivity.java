@@ -1,6 +1,7 @@
 package com.android.almg.chalchiteko;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ButtonBarLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Button btn2;
     private Button btn3;
+    private Button btn4;
     private final String GREETER = "Hello from the other side!";
 
     @Override
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.btnVocabulary);
         btn2 = (Button) findViewById(R.id.btnExamples);
         btn3 = (Button) findViewById(R.id.btnEvaluation);
+        btn4 = (Button) findViewById(R.id.btnLogin);
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -49,5 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // Acceder al Segundo Activity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Tomar datos del Intent
+        Bundle bundle = getIntent().getExtras();
     }
 }
