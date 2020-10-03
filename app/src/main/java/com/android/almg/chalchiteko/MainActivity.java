@@ -9,9 +9,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View btn;
-    private View btn2;
-    private View btn3;
+    private Button btn;
+    private Button btn2;
+    private Button btn3;
     private final String GREETER = "Hello from the other side!";
 
     @Override
