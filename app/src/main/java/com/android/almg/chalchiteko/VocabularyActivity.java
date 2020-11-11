@@ -11,6 +11,8 @@ public class VocabularyActivity extends AppCompatActivity {
 
     private Button btn;
     private Button btn2;
+    private Button btn3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,7 @@ public class VocabularyActivity extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btnView);
         btn2 = (Button) findViewById(R.id.btnTranslate);
+        btn3 = (Button) findViewById(R.id.btnAddV);
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -33,6 +36,15 @@ public class VocabularyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Acceder al Segundo Activity
                 Intent intent = new Intent(VocabularyActivity.this, TranslateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // Acceder al Tercer Activity
+                Intent intent = new Intent(VocabularyActivity.this, PalabraListActivity.class);
                 startActivity(intent);
             }
         });

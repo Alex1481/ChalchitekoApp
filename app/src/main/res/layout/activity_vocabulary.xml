@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".VocabularyActivity">
 
+    <TextView
+        android:id="@+id/txtInitial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona una Opción"
+        android:textSize="35dp"
+        android:fontFamily="cursive"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/btnTranslate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:text="Traductor"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,26 +33,36 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
     <Button
-        android:id="@+id/btnView"
+    android:id="@+id/btnView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Ver Vocabulario"
+    android:layout_marginBottom="10dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/btnTranslate"/>
+
+    <Button
+    android:id="@+id/btnAddE"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Agregar Ejemplos"
+    android:layout_marginBottom="10dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/btnView"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <Button
+        android:id="@+id/btnAddV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver Vocabulario"
+        android:text="Agregar Vocabulario"
         android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnTranslate"/>
+        app:layout_constraintBottom_toTopOf="@+id/btnAddE" />
 
-    <TextView
-        android:id="@+id/txtInitial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona una Opción"
-        android:textSize="35dp"
-        android:fontFamily="cursive"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnTranslate"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

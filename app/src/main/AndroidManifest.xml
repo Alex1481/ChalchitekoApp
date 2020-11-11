@@ -12,9 +12,22 @@
         android:theme="@style/MyTheme.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".EjemploListActivity"
+            android:label="@string/title_ejemplo_list"
+            android:theme="@style/MyTheme.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".EjemploDetailActivity"
+            android:label="@string/title_ejemplo_detail"
+            android:parentActivityName=".EjemploListActivity"
+            android:theme="@style/MyTheme.DayNight.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.almg.chalchiteko.EjemploListActivity" />
+        </activity>
+        <activity
             android:name=".PalabraListActivity"
             android:label="@string/title_palabra_list"
-            android:theme="@style/MyTheme.DayNight.NoActionBar"></activity>
+            android:theme="@style/MyTheme.DayNight.NoActionBar" />
         <activity
             android:name=".PalabraDetailActivity"
             android:label="@string/title_palabra_detail"

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -16,14 +17,14 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<Palabra> ITEMS = new ArrayList<Palabra>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, Palabra> ITEM_MAP = new HashMap<String, Palabra>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 0;
 
     static {
         // Add some sample items.
@@ -32,13 +33,13 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(Palabra item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static Palabra createDummyItem(int position) {
+        return new Palabra(String.valueOf(position), "Item " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
@@ -53,20 +54,66 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
-        public final String id;
-        public final String content;
-        public final String details;
+    public static class Palabra {
+        private String id;
+        private String spanish;
+        private String chalchiteko;
 
-        public DummyItem(String id, String content, String details) {
+        public Palabra() {
+
+        }
+
+        public Palabra(String spanish, String chalchiteko) {
+            this.spanish = spanish;
+            this.chalchiteko = chalchiteko;
+        }
+
+        public Palabra(String id, String spanish, String chalchiteko) {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.spanish = spanish;
+            this.chalchiteko = chalchiteko;
         }
 
         @Override
         public String toString() {
-            return content;
+            return spanish;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getSpanish() {
+            return spanish;
+        }
+
+        public void setSpanish(String spanish) {
+            this.spanish = spanish;
+        }
+
+        public String getChalchiteko() {
+            return chalchiteko;
+        }
+
+        public void setChalchiteko(String chalchiteko) {
+            this.chalchiteko = chalchiteko;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Palabra palabra = (Palabra) o;
+            return Objects.equals(id, palabra.id);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
         }
     }
 }

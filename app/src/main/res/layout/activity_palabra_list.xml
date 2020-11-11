@@ -27,8 +27,60 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/palabra_list" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+
+                <EditText
+                    android:id="@+id/etSpanish"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:inputType="textCapWords"
+                    android:hint="Español"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/cardview_shadow_start_color"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@id/etWord"
+                    />
+
+                <EditText
+                    android:id="@+id/etWord"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:inputType="textCapWords"
+                    android:hint="Chalchiteko"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/cardview_shadow_start_color"
+
+                    />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="88dp"
+                    android:text="Guardar"/>
+
+
+            </LinearLayout>
+
+            <include layout="@layout/palabra_list" />
+
+        </LinearLayout>
+
     </FrameLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

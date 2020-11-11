@@ -3,48 +3,34 @@ package com.android.almg.chalchiteko;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
-import com.android.almg.chalchiteko.dummy.DummyContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.android.almg.chalchiteko.dummy.DummyContent;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
- * An activity representing a list of Palabras. This activity
+ * An activity representing a list of Ejemplos. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link PalabraDetailActivity} representing
+ * lead to a {@link EjemploDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class PalabraListActivity extends AppCompatActivity {
+public class EjemploListActivity extends AppCompatActivity {
 
-    private static final String PATH_WORD = "word";
-
-    @BindView(R.id.etSpanish)
-    EditText etSpanish;
-    @BindView(R.id.etWord)
-    EditText etWord;
-    @BindView(R.id.btnSave)
-    Button btnSave;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -54,8 +40,7 @@ public class PalabraListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palabra_list);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_ejemplo_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,7 +55,7 @@ public class PalabraListActivity extends AppCompatActivity {
             }
         });
 
-        if (findViewById(R.id.palabra_detail_container) != null) {
+        if (findViewById(R.id.ejemplo_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -78,7 +63,7 @@ public class PalabraListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.palabra_list);
+        View recyclerView = findViewById(R.id.ejemplo_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
@@ -87,49 +72,36 @@ public class PalabraListActivity extends AppCompatActivity {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
     }
 
-    @OnClick(R.id.btnSave)
-    public void onViewClicked() {
-        DummyContent.Palabra palabra = new DummyContent.Palabra(etSpanish.getText().toString().trim(),
-                etWord.getText().toString().trim());
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference(PATH_WORD);
-
-        reference.push().setValue(palabra);
-        etSpanish.setText("");
-        etWord.setText("");
-    }
-
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final PalabraListActivity mParentActivity;
-        private final List<DummyContent.Palabra> mValues;
+        private final EjemploListActivity mParentActivity;
+        private final List<DummyContent.DummyItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DummyContent.Palabra item = (DummyContent.Palabra) view.getTag();
+                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(PalabraDetailFragment.ARG_ITEM_ID, item.getId());
-                    PalabraDetailFragment fragment = new PalabraDetailFragment();
+                    arguments.putString(EjemploDetailFragment.ARG_ITEM_ID, item.id);
+                    EjemploDetailFragment fragment = new EjemploDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.palabra_detail_container, fragment)
+                            .replace(R.id.ejemplo_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, PalabraDetailActivity.class);
-                    intent.putExtra(PalabraDetailFragment.ARG_ITEM_ID, item.getId());
+                    Intent intent = new Intent(context, EjemploDetailActivity.class);
+                    intent.putExtra(EjemploDetailFragment.ARG_ITEM_ID, item.id);
 
                     context.startActivity(intent);
                 }
             }
         };
 
-        SimpleItemRecyclerViewAdapter(PalabraListActivity parent,
-                                      List<DummyContent.Palabra> items,
+        SimpleItemRecyclerViewAdapter(EjemploListActivity parent,
+                                      List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -139,14 +111,14 @@ public class PalabraListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.palabra_list_content, parent, false);
+                    .inflate(R.layout.ejemplo_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getId());
-            holder.mContentView.setText(mValues.get(position).getSpanish());
+            holder.mIdView.setText(mValues.get(position).id);
+            holder.mContentView.setText(mValues.get(position).content);
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

@@ -2,4 +2,6 @@
     <string name="app_name">Chalchiteko</string>
     <string name="title_palabra_list">Palabras</string>
     <string name="title_palabra_detail">Palabra Detail</string>
+    <string name="title_ejemplo_list">Ejemplos</string>
+    <string name="title_ejemplo_detail">Ejemplo Detail</string>
 </resources>
