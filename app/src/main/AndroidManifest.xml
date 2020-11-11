@@ -11,7 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".PalabraListActivity"
+            android:label="@string/title_palabra_list"
+            android:theme="@style/MyTheme.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".PalabraDetailActivity"
+            android:label="@string/title_palabra_detail"
+            android:parentActivityName=".PalabraListActivity"
+            android:theme="@style/MyTheme.DayNight.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.almg.chalchiteko.PalabraListActivity" />
+        </activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".TranslateActivity" />
         <activity android:name=".EvaluationActivity" />
         <activity android:name=".ExamplesActivity" />

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chalchiteko</string>
+    <string name="title_palabra_list">Palabras</string>
+    <string name="title_palabra_detail">Palabra Detail</string>
 </resources>
