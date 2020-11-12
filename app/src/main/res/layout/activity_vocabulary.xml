@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".VocabularyActivity">
 
+
     <TextView
         android:id="@+id/txtInitial"
         android:layout_width="wrap_content"
@@ -13,11 +14,11 @@
         android:text="Selecciona una Opción"
         android:textSize="35dp"
         android:fontFamily="cursive"
-        android:layout_marginTop="150dp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddV"/>
 
     <Button
         android:id="@+id/btnTranslate"

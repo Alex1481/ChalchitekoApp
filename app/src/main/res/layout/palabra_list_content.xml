@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:width="105dp"
         android:layout_margin="@dimen/text_margin"
-        android:textColor="@color/colorText"
-
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:width="135dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/colorText" />
 
     <TextView
         android:id="@+id/content"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:layout_weight="50"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorText" />
 
     <Button
         android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="2dp"
-        android:minWidth="40dp"
-        android:textSize="5dp"
-        android:text="Delete"
-        android:backgroundTint="@color/colorAccent"/>
+        android:backgroundTint="@color/colorAccent"
+        android:foreground="@drawable/ic_delete"
+        android:foregroundGravity="center"
+        android:insetTop="6dp" />
 </LinearLayout>

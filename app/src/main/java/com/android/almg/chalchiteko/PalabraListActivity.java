@@ -110,8 +110,8 @@ public class PalabraListActivity extends AppCompatActivity implements AdapterVie
     private void configSpinner() {
         spSpanish.setOnItemSelectedListener(this);
 
-        aaPalabras = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
-        aaPalabras.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaPalabras = new ArrayAdapter<>(this, R.layout.spinner_item_spanish);
+        aaPalabras.setDropDownViewResource(R.layout.spinner_item_spanish);
 
         spSpanish.setAdapter(aaPalabras);
     }
