@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
@@ -8,7 +8,10 @@
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="105dp"
         android:layout_margin="@dimen/text_margin"
+        android:textColor="@color/colorText"
+
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -16,5 +19,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_weight="50"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+        android:minWidth="40dp"
+        android:textSize="5dp"
+        android:text="Delete"
+        android:backgroundTint="@color/colorAccent"/>
 </LinearLayout>

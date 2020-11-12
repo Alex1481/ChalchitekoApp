@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +21,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.almg.chalchiteko.dummy.DummyContent;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +46,7 @@ import butterknife.OnClick;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class PalabraListActivity extends AppCompatActivity {
+public class PalabraListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String PATH_WORD = "word";
 
@@ -45,6 +56,16 @@ public class PalabraListActivity extends AppCompatActivity {
     EditText etWord;
     @BindView(R.id.btnSave)
     Button btnSave;
+    @BindView(R.id.spSpanish)
+    Spinner spSpanish;
+    @BindView(R.id.btnRefreshSpinner)
+    Button btnRefreshSpinner;
+
+    List<DummyContent.Palabra> palabras;
+    DummyContent.Palabra palabraUpdate;
+    ArrayAdapter<String> aaPalabras;
+
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -78,13 +99,88 @@ public class PalabraListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        configSpinner();
+
+
         View recyclerView = findViewById(R.id.palabra_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
+    private void configSpinner() {
+        spSpanish.setOnItemSelectedListener(this);
+
+        aaPalabras = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
+        aaPalabras.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spSpanish.setAdapter(aaPalabras);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        palabraUpdate = palabras.get(position);
+        etSpanish.setText(palabraUpdate.getSpanish());
+        etWord.setText(palabraUpdate.getChalchiteko());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {}
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference(PATH_WORD);
+
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                DummyContent.Palabra palabra = dataSnapshot.getValue(DummyContent.Palabra.class);
+                palabra.setId(dataSnapshot.getKey());
+
+                if (!DummyContent.ITEMS.contains(palabra)) {
+                    DummyContent.addItem(palabra);
+                }
+
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                DummyContent.Palabra palabra = dataSnapshot.getValue(DummyContent.Palabra.class);
+                palabra.setId(dataSnapshot.getKey());
+
+                if (DummyContent.ITEMS.contains(palabra)) {
+                    DummyContent.updateItem(palabra);
+                }
+
+                recyclerView.getAdapter().notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                DummyContent.Palabra palabra = dataSnapshot.getValue(DummyContent.Palabra.class);
+                palabra.setId(dataSnapshot.getKey());
+
+                if (DummyContent.ITEMS.contains(palabra)) {
+                    DummyContent.deleteItem(palabra);
+                }
+
+                recyclerView.getAdapter().notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                Toast.makeText(PalabraListActivity.this, "Moved", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(PalabraListActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick(R.id.btnSave)
@@ -95,9 +191,41 @@ public class PalabraListActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(PATH_WORD);
 
-        reference.push().setValue(palabra);
+        DummyContent.Palabra palabraUpdate = DummyContent.getPalabra(palabra.getSpanish());
+        if (palabraUpdate != null) {
+            reference.child(palabraUpdate.getId()).setValue(palabra);
+        } else {
+            reference.push().setValue(palabra);
+        }
+
         etSpanish.setText("");
         etWord.setText("");
+    }
+
+    @OnClick(R.id.btnRefreshSpinner)
+    public void onRefreshSpinnerClicked() {
+        palabras = new ArrayList<>();
+        aaPalabras.clear();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference(PATH_WORD);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    DummyContent.Palabra palabra = snapshot.getValue(DummyContent.Palabra.class);
+                    palabra.setId(dataSnapshot.getKey());
+                    palabras.add(palabra);
+                    aaPalabras.add(palabra.getSpanish());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(PalabraListActivity.this, "Error al consultar la base de datos",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -128,6 +256,7 @@ public class PalabraListActivity extends AppCompatActivity {
             }
         };
 
+
         SimpleItemRecyclerViewAdapter(PalabraListActivity parent,
                                       List<DummyContent.Palabra> items,
                                       boolean twoPane) {
@@ -145,11 +274,20 @@ public class PalabraListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getId());
             holder.mContentView.setText(mValues.get(position).getSpanish());
+            holder.mIdView.setText(mValues.get(position).getChalchiteko());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
+
+            holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference reference = database.getReference(PATH_WORD);
+                    reference.child(mValues.get(position).getId()).removeValue();
+                }
+            });
         }
 
         @Override
@@ -160,9 +298,13 @@ public class PalabraListActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView mIdView;
             final TextView mContentView;
+            @BindView(R.id.btnDelete)
+            Button btnDelete;
 
             ViewHolder(View view) {
                 super(view);
+
+                ButterKnife.bind(this, view);
                 mIdView = (TextView) view.findViewById(R.id.id_text);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }

@@ -33,7 +33,17 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(Palabra item) {
+    public static void updateItem(Palabra palabra){
+        ITEMS.set(ITEMS.indexOf(palabra), palabra);
+        ITEM_MAP.put(palabra.getId(), palabra);
+    }
+
+    public static void deleteItem(Palabra palabra){
+        ITEMS.remove(palabra);
+        ITEM_MAP.remove(palabra);
+    }
+
+    public static void addItem(Palabra item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
@@ -51,6 +61,16 @@ public class DummyContent {
         return builder.toString();
     }
 
+    public static Palabra getPalabra(String name) {
+
+        for (Palabra palabra : ITEMS) {
+            if (palabra.getSpanish().equals(name)){
+                return palabra;
+            }
+        }
+        return null;
+    }
+
     /**
      * A dummy item representing a piece of content.
      */
@@ -60,7 +80,6 @@ public class DummyContent {
         private String chalchiteko;
 
         public Palabra() {
-
         }
 
         public Palabra(String spanish, String chalchiteko) {

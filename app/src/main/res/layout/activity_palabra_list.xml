@@ -37,7 +37,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center_vertical">
+
+                <Spinner
+                    android:id="@+id/spSpanish"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/btnRefreshSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Actualizar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:padding="8dp">
+
+
+                <EditText
+                    android:id="@+id/etWord"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:inputType="textCapWords"
+                    android:hint="Chalchiteko"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/cardview_shadow_start_color"/>
 
 
                 <EditText
@@ -53,17 +84,9 @@
                     android:nextFocusForward="@id/etWord"
                     />
 
-                <EditText
-                    android:id="@+id/etWord"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:inputType="textCapWords"
-                    android:hint="Chalchiteko"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/cardview_shadow_start_color"
 
-                    />
+
+
 
                 <Button
                     android:id="@+id/btnSave"
@@ -75,7 +98,8 @@
 
             </LinearLayout>
 
-            <include layout="@layout/palabra_list" />
+            <include layout="@layout/palabra_list"
+                />
 
         </LinearLayout>
 
