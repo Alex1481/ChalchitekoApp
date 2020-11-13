@@ -88,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                     onSetDataUser(user.getDisplayName(), user.getEmail(), user.zza() != null ?
                             user.zza().get(0) : PROVEEDOR_DESCONOCIDO);
                 } else {
+                    onSignedOutCleanup();
+
                     startActivityForResult(AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setIsSmartLockEnabled(false)
@@ -97,7 +99,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+    }
 
+    private void onSignedOutCleanup() {
+        onSetDataUser("","", "");
     }
 
     private void onSetDataUser(String userName, String email, String provider) {
