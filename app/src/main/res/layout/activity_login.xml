@@ -4,7 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    tools:menu="@menu/main_menu">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:menu="@menu/main_menu"
+        android:outlineAmbientShadowColor="@color/colorText"
+        tools:ignore="MissingConstraints" />
+
+
+
+    <ImageView
+        android:id="@+id/imgPhotoProfile"
+        android:layout_width="@dimen/main.img.size"
+        android:layout_height="@dimen/main.img.size"
+        android:src="@drawable/ic_loginperson"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInitial"/>
 
     <TextView
         android:id="@+id/textInitial"
@@ -18,10 +45,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/etName"
+        app:layout_constraintBottom_toTopOf="@+id/tvUserName"
         />
 
-    
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/main.hint.userName"
+        android:padding="@dimen/main.padding.tv"
+        android:text="Usuario"
+        android:textSize="15dp"
+        android:fontFamily="cursive"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPhotoProfile"
+        />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/main.hint.email"
+        android:padding="@dimen/main.padding.tv"
+        android:text="Correo"
+        android:textSize="15dp"
+        android:fontFamily="cursive"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName"
+        />
+
+    <TextView
+        android:id="@+id/tvProvider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/main.hint.provider"
+        android:padding="@dimen/main.padding.tv"
+        android:text="Proveedor"
+        android:textSize="15dp"
+        android:fontFamily="cursive"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        />
+
 
 
     <Button

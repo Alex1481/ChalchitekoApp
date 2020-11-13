@@ -16,4 +16,14 @@
 
     <style name="MyTheme.DayNight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextViewBase">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/main.padding.tv</item>
+        <item name="fontFamily">cursive</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
 </resources>
