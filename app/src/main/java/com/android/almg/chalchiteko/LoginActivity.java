@@ -29,5 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //Tomar datos del Intent
         Bundle bundle = getIntent().getExtras();
+
     }
 }
