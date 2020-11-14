@@ -1,7 +1,12 @@
 package com.android.almg.chalchiteko;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private static final String PROVEEDOR_DESCONOCIDO = "Proveedor Desconocido";
     private static final String PASSWORD_FIREBASE = "password";
+    private static final String FACEBOOK = "facebook.com";
 
     @BindView(R.id.imgPhotoProfile)
     ImageView imgPhotoProfile;
@@ -90,15 +96,34 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     onSignedOutCleanup();
 
+                    AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
+                            .setPermissions(Arrays.asList("user_friends", "user_gender"))
+                            .build();
+
                     startActivityForResult(AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setIsSmartLockEnabled(false)
                             .setTosUrl("https://www.facebook.com/pg/Comunidad-Ling%C3%BC%C3%ADstica-Chalchiteka-ALMG-102015078068501/community/")
-                            .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
+                            .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), facebookIdp))
                             .build(), RC_SIGN_IN);
                 }
             }
         };
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.android.almg.chalchiteko",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
     private void onSignedOutCleanup() {
@@ -112,8 +137,11 @@ public class LoginActivity extends AppCompatActivity {
         int drawableRes;
         switch (provider){
             case PASSWORD_FIREBASE:
-                drawableRes = R.drawable.ic_facebook;
+                drawableRes = R.drawable.ic_email;
             break;
+            case FACEBOOK:
+                drawableRes = R.drawable.ic_facebook;
+                break;
             default:
                 drawableRes = R.drawable.ic_block_helper;
                 provider = PROVEEDOR_DESCONOCIDO;
