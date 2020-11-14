@@ -105,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                             .setIsSmartLockEnabled(false)
                             .setTosUrl("https://www.facebook.com/pg/Comunidad-Ling%C3%BC%C3%ADstica-Chalchiteka-ALMG-102015078068501/community/")
                             .setAvailableProviders(Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), facebookIdp))
+                            .setTheme(R.style.GreenTheme)
+                            .setLogo(R.drawable.clc)
                             .build(), RC_SIGN_IN);
                 }
             }
