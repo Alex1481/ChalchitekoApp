@@ -69,6 +69,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        //Codigo para icono en el Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         btn = (Button) findViewById(R.id.btnLogin);
 
         btn.setOnClickListener(new View.OnClickListener() {

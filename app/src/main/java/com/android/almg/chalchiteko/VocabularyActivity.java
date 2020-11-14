@@ -18,6 +18,10 @@ public class VocabularyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary);
 
+        //Codigo para icono en el Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         btn = (Button) findViewById(R.id.btnView);
         btn2 = (Button) findViewById(R.id.btnTranslate);
         btn3 = (Button) findViewById(R.id.btnAddV);

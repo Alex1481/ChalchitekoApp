@@ -36,6 +36,10 @@ public class TranslateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
 
+        //Codigo para icono en el Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         //Tomar datos del Intent
         Bundle bundle = getIntent().getExtras();
         search_edit_text = (EditText) findViewById(R.id.search_edit_text);

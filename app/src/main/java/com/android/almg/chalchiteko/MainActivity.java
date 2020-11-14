@@ -16,12 +16,16 @@ public class MainActivity extends AppCompatActivity {
     private Button btn2;
     private Button btn3;
     private Button btn4;
-    private final String GREETER = "Hello from the other side!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Codigo para icono en el Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
 
         btn = (Button) findViewById(R.id.btnVocabulary);
         btn2 = (Button) findViewById(R.id.btnExamples);

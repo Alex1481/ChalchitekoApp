@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg3"
     tools:context=".VocabularyActivity">
 
 
@@ -27,7 +28,7 @@
         android:layout_marginTop="150dp"
         android:text="Traductor"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +50,7 @@
     android:layout_height="wrap_content"
     android:text="Agregar Ejemplos"
     android:layout_marginBottom="10dp"
-    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginRight="20dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/btnView"
     style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>

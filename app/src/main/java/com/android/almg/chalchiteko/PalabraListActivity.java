@@ -78,6 +78,9 @@ public class PalabraListActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_palabra_list);
         ButterKnife.bind(this);
 
+        //Codigo para icono en el Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

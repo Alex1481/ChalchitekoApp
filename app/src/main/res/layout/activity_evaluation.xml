@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg3"
     tools:context=".EvaluationActivity">
 
     <TextView
@@ -40,7 +41,7 @@
         android:textSize="35dp"
         android:fontFamily="casual"
         android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btnIntermediate"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
@@ -64,7 +65,7 @@
         android:textSize="25dp"
         android:fontFamily="casual"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIntermediate"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
