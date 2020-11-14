@@ -44,7 +44,6 @@ public class TranslateAdpater extends RecyclerView.Adapter<TranslateAdpater.Sear
     public void onBindViewHolder(SearchViewHolder holder, int position) {
         holder.id_text.setText(spanishList.get(position));
         holder.content.setText(chalchitekoList.get(position));
-
     }
 
 
