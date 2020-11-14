@@ -2,6 +2,8 @@ package com.android.almg.chalchiteko;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -309,5 +311,10 @@ public class PalabraListActivity extends AppCompatActivity implements AdapterVie
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
         }
+    }
+
+    //URL con conexion a API de WhatsApp
+    public void irMessage (View view){
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.maestrosdelweb.com/que-son-las-bases-de-datos/"));
     }
 }
