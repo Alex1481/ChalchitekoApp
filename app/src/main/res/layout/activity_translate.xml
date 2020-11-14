@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Traductor a Chalchiteko"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="cursive"
         android:textSize="30dp"
         android:textColor="@color/colorPrimaryDark"
@@ -19,38 +19,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
-    // Palabra
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etWord"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Ejemplo: Escritorio"
-        android:textColorHint="@color/colorPrimary"
-        android:layout_marginTop="10dp"
-        app:endIconMode="clear_text"
-        app:helperText="Ingrese una palabra en español"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="@color/colorPrimaryDark"/>
-    </com.google.android.material.textfield.TextInputLayout>
+<EditText
+    android:id="@+id/search_edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Ingrese una palabra en Español"
+    android:textColorHint="#A6A6A6"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+    android:textColor="@color/colorText"
+    android:layout_margin="15dp"/>
 
     <Button
+        android:id="@+id/btnTransalteWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Traducir"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWord"
+        app:layout_constraintTop_toBottomOf="@+id/search_edit_text"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTransalteWord" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

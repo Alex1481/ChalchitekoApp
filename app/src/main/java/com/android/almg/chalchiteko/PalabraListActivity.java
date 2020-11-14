@@ -78,9 +78,6 @@ public class PalabraListActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_palabra_list);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

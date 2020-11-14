@@ -41,7 +41,6 @@
 
     <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?colorSurface</item>
-        <item name="android:windowLightStatusBar">true</item> <!--change color to icons on statusBar-->
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?colorControlHighlight</item>

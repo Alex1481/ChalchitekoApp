@@ -16,12 +16,12 @@
         <activity
             android:name=".PalabraListActivity"
             android:label="@string/title_palabra_list"
-            android:theme="@style/MyTheme.DayNight.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".PalabraDetailActivity"
             android:label="@string/title_palabra_detail"
             android:parentActivityName=".PalabraListActivity"
-            android:theme="@style/MyTheme.DayNight.NoActionBar">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.almg.chalchiteko.PalabraListActivity" />
